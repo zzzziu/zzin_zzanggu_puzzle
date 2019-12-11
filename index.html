@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Jua&display=swap" rel="stylesheet">
+    <title>🤠 짱구 퍼즐을 맞춰랏! 🤠</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/image-puzzle.css" rel="stylesheet">
+    <script src="js/image-puzzle.js"></script>
+
+
+    <style type="text/css">
+        html{cursor: url(face1.png), auto;}
+        body{font-family: 'Jua', sans-serif;}
+        h1, p{text-align: center; margin-top: 21.440px; margin-bottom: 15px;}
+        p{font-size: 15px; margin: auto;}
+        li{cursor: url(face1.png), auto;}
+        h3{margin: 0; padding-bottom: 35px; }
+        h4{font-size: 23px; color: #ed147c;}
+        #back{background: url(./back.jpg); background-size: cover; background-attachment: fixed;}
+        #sing{position: absolute; top: 52px; left: 280px; width: 140px; height: auto;}
+
+        #levelPanel{margin: 0; padding-top: 10px; padding-bottom: 10px;}
+        
+    </style>
+
+</head>
+<body id="back">
+
+    <div id="collage">
+        <h1>🤠 짱구 퍼즐을 맞춰랏! 🤠</h1>
+        <h3>🐥 이미지를 '드래그 앤 드롭'해서 퍼즐을 맞춰주세요! 🐥</h3>
+
+        <h4 id="sing">노래나와라! 얍!</h4>
+        <audio loop id="song">
+            <source src="song.mp3" type="audio/mpeg">
+        </audio>
+
+        <div id="playPanel" style="padding: 5px; display: block;">
+            <div style="display:inline-block; margin:auto; width:100%; vertical-align:top; align-items: center; padding-top: 12px;">
+                <ul id="sortable" class="sortable">
+                    <li id="0" data-value="0" draggable="true" dragstart="true" style="background-image: url(&quot;images/5.png&quot;); background-size: 400%; background-position: 0% 0%; width: 202.666px; height: 144.073px;"></li>
+                    <li id="2" data-value="2" draggable="true" dragstart="true" style="background-image: url(&quot;images/5.png&quot;); background-size: 400%; background-position: 100% 0%; width: 202.666px; height: 144.073px;"></li>
+                    <li id="3" data-value="3" draggable="true" dragstart="true" style="background-image: url(&quot;images/5.png&quot;); background-size: 400%; background-position: 0% 50%; width: 202.666px; height: 144.073px;"></li>
+                    <li id="8" data-value="8" draggable="true" dragstart="true" style="background-image: url(&quot;images/5.png&quot;); background-size: 400%; background-position: 100% 100%; width: 202.666px; height: 144.073px;"></li>
+                    <li id="4" data-value="4" draggable="true" dragstart="true" style="background-image: url(&quot;images/5.png&quot;); background-size: 400%; background-position: 50% 50%; width: 202.666px; height: 144.073px;"></li>
+                    <li id="1" data-value="1" draggable="true" dragstart="true" style="background-image: url(&quot;images/5.png&quot;); background-size: 400%; background-position: 50% 0%; width: 202.666px; height: 144.073px;"></li>
+                    <li id="5" data-value="5" draggable="true" dragstart="true" style="background-image: url(&quot;images/5.png&quot;); background-size: 400%; background-position: 100% 50%; width: 202.666px; height: 144.073px;"></li>
+                    <li id="6" data-value="6" draggable="true" dragstart="true" style="background-image: url(&quot;images/5.png&quot;); background-size: 400%; background-position: 0% 100%; width: 202.666px; height: 144.073px;"></li>
+                    <li id="7" data-value="7" draggable="true" dragstart="true" style="background-image: url(&quot;images/5.png&quot;); background-size: 400%; background-position: 50% 100%; width: 202.666px; height: 144.073px;"></li>
+                </ul>
+
+
+                <div id="actualImageBox">
+                    <div id="stepBox">
+                        <div>누른횟수 :</div>
+                        <div id="stepCount" class="stepCount">0</div>
+                    </div>
+                    <div id="timeBox">
+                        플레이시간 : <span id="timerPanel">37</span> 초
+                    </div><br><br>
+                    <img id="actualImage">
+                    
+                    <p id="levelPanel">
+                        <input type="radio" name="level" id="easy" checked="checked" value="3" onchange="imagePuzzle.startGame(images, this.value);"> <label for="easy">&nbsp;하급</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="level" id="medium" value="4" onchange="imagePuzzle.startGame(images, this.value);">                        <label for="medium">&nbsp;중급</label>&nbsp;&nbsp;&nbsp;
+                        <input type="radio" name="level" id="hard" value="5" onchange="imagePuzzle.startGame(images, this.value);">                        <label for="hard">&nbsp;고급</label>&nbsp;&nbsp;&nbsp;
+                    </p>
+                    <div style="padding-top: 15px;">
+                        <button id="newPhoto" type="button" class="btn" onclick="restart();">다른 그림 보기</button>
+                        <button type="button" onclick="restart();">다시하기</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="gameOver" style="display:none;">
+            <div style="background-color: #ffffff; padding: 25px 10px 20px 10px; text-align: center; margin-top: 30px;">
+                <h2 style="text-align:center">아주 잘해써어~~!
+                <br><br> 움직임 횟수 : <span id="stepCount" class="stepCount">0</span> 번
+                <br> 플레이 시간 : <span class="timeCount">0</span> 초<br><br>
+                <div>
+                    <button type="button" style="margin-top: 12px;" onclick="window.location.reload(true);">다시하기</button>
+                </div>
+            </h2></div>
+        </div>
+
+        <script>
+
+            sing.onclick = function() {
+            song.play();
+            }
+            
+            var images = [
+                { src: 'images/1.jpg' },
+                { src: 'images/2.jpg' },
+                { src: 'images/3.jpg'},
+                { src: 'images/4.jpg' },
+                { src: 'images/5.jpg' },
+                { src: 'images/12.jpg' },
+                { src: 'images/10.jpg' },
+                { src: 'images/20.jpg' },
+                { src: 'images/22.jpg' },
+                { src: 'images/11.jpg' },
+                { src: 'images/21.jpg' }
+            ];
+
+            
+            window.onload = function () {
+                var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
+                imagePuzzle.startGame(images, gridSize);
+            };
+            function restart() {
+                var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
+                    imagePuzzle.startGame(images, gridSize);
+            }
+         
+        </script>
+    </div>
+
+</body></html>
